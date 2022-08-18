@@ -1,0 +1,53 @@
+.to-do-list {
+    height: 100vh;
+    background: #e9e9ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .list-wrapper {
+        width: 400px;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .title-wrapper {
+            width: 100%;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(158, 33, 216);
+            position: relative;
+            span {
+                position: absolute;
+                left: 15px;
+                svg {
+                    fill: #fff;
+                }
+            }
+            p {
+                font-size: 18px;
+                color: #fff;
+                text-align: center;
+                margin: 0;
+            }
+        }
+        .list {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: -webkit-fill-available;
+            height: 350px;
+            margin-top: 20px;
+            padding: 30px 50px;
+            background-color: #fff;
+            &-items {
+                min-width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+    }
+}

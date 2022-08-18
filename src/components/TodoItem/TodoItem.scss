@@ -1,0 +1,20 @@
+.to-do-item {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    &--with-icon {
+        display: flex;
+        align-items: center;
+    }
+    &--done {
+        text-decoration: line-through;
+    }
+    &--title {
+        margin: 0 0 0 15px;
+        font-weight: 500;
+        font-size: 18px;
+    }
+}
