@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`button snapshots should render correctly with title value 1`] = `
+<button
+  class="button"
+  data-testid="button-id"
+>
+  <p>
+    Create
+  </p>
+</button>
+`;

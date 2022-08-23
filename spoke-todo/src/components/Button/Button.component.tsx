@@ -8,13 +8,15 @@ interface Props {
     onClick?: () => void
 }
 
-const Button: FC<Props> = (props:Props) => {
+const Button = ({title, isIcon, onClick}: Partial<Props>) => {
     return (
         <button 
-            onClick={props.onClick}
-            className="button">
-            {props.isIcon && <PlusOutlined />}
-            <p>{props.title}</p>
+            data-testid="button-id"
+            className="button"
+            onClick={onClick}
+        >
+            {isIcon && <PlusOutlined />}
+            <p>{title}</p>
         </button>
     )
 }

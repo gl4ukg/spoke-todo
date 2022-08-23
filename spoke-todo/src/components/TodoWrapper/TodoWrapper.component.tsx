@@ -7,25 +7,30 @@ import "./TodoWrapper.scss"
 interface Props {
     title: string
     buttonTitle: string
-    navigate: () => void
+    navigation: () => void
     children: ReactElement
 }
 
-const TodoWrapper: React.FC<Props> = (props: Props) => {
+const TodoWrapper = ({title, buttonTitle, navigation, children}: Partial<Props>) => {
 
     const navigate = useNavigate()
 
     return (
-        <div className="list-wrapper">
+        <div 
+            data-testid="list-wrapper-id"
+            className="list-wrapper">
             <div className="title-wrapper">
-                <UnorderedListOutlined onClick={() => navigate("/")} />
-                <p>{props.title}</p>
+                <UnorderedListOutlined 
+                    className="unordered-list-icon" 
+                    onClick={() => navigate("/")} 
+                />
+                <p>{title}</p>
             </div>
             <div className="list">
-                {props.children}
+                {children}
                 <Button 
-                    title={props.buttonTitle}
-                    onClick={props.navigate}
+                    title={buttonTitle}
+                    onClick={navigation}
                     isIcon={true} />
             </div>
         </div>

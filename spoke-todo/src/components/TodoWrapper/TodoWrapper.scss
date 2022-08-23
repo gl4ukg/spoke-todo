@@ -1,6 +1,5 @@
 .list-wrapper {
     width: 400px;
-    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,6 +15,13 @@
         justify-content: center;
         background-color: var(--main);
         position: relative;
+
+        .unordered-list-icon {
+            transition: transform .8s;
+            &:hover {
+                transform: scale(1.3);
+            }
+        }
 
         span {
             position: absolute;
@@ -40,7 +46,7 @@
         flex-direction: column;
         justify-content: center;
         width: -webkit-fill-available;
-        height: 350px;
+        height: 250px;
         margin-top: 20px;
         padding: 30px 50px;
         background-color: var(--white);
