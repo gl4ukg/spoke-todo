@@ -1,0 +1,21 @@
+.button {
+    display: flex;
+    height: fit-content;
+    background-color: var(--main);
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 0;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    svg {
+        fill: var(--white);
+    }
+    p {
+        font-weight: 600;
+        color: var(--white);
+        margin: 0 0 0 6px;
+    }
+}
