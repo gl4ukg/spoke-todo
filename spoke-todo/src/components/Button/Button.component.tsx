@@ -4,7 +4,8 @@ import "./Button.scss"
 
 interface Props {
     title: string
-    onClick: () => void
+    isIcon: boolean
+    onClick?: () => void
 }
 
 const Button: FC<Props> = (props:Props) => {
@@ -12,7 +13,7 @@ const Button: FC<Props> = (props:Props) => {
         <button 
             onClick={props.onClick}
             className="button">
-            <PlusOutlined />
+            {props.isIcon && <PlusOutlined />}
             <p>{props.title}</p>
         </button>
     )

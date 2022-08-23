@@ -7,12 +7,14 @@ export interface ITodoReducer {
     isLoading: boolean
     todos: ITodo[]
     todo: ITodo
+    todoInput: string
 }
 
 const initialState = {
     isLoading: false,
     todos: [] as ITodo[],
-    todo: {} as ITodo
+    todo: {} as ITodo,
+    todoInput: "",
 } as ITodoReducer
 
 export const todoReducer = (state = initialState, action: IAction) => 
@@ -20,6 +22,9 @@ export const todoReducer = (state = initialState, action: IAction) =>
         switch(action.type) {
             case constants.LOAD_LOADING:
                 draft.isLoading = action.payload;
+                break;
+            case constants.SET_TODO_INPUT:
+                draft.todoInput = action.payload;
                 break;
             case constants.SET_TODOS:
                 draft.todos = action.payload;

@@ -1,4 +1,12 @@
 .text-input {
+    display: flex;
+    flex-direction: column;
+    label {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 4px;
+        color: var(--grey);
+    }
     .todo-input {
         height: 40px;
         border: 1px solid var(--main);

@@ -18,6 +18,11 @@ const App:React.FC = () => {
 					/>
 			
 					<Route
+						path="/add-new-item"
+						element={<NewTodo />}
+					/>
+					
+					<Route
 						path="/add-new-item/:id"
 						element={<NewTodo />}
 					/>

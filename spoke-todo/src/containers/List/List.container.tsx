@@ -14,6 +14,7 @@ const List: React.FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const todos: ITodo[] | undefined = useSelector((state: CombinedReducersState) => state.todos.todos);
+    const isLoading: boolean | undefined = useSelector((state: CombinedReducersState) => state.todos.isLoading);
     const getTodos = useCallback(() => dispatch(loadTodos()),[dispatch])
     const deleteTodo = useCallback((state: number) => dispatch(loadDelete(state)),[dispatch])
     const updateDoneStatus = useCallback((state: number) => dispatch(loadUpdateDoneStatus(state)),[dispatch])
@@ -32,6 +33,8 @@ const List: React.FC = () => {
                     <div className="list-items">
                         {todos?.map((item: ITodo) => 
                             <TodoItem 
+                                isLoading={isLoading}
+                                loadingCount={todos?.length}
                                 key={item.id}
                                 title={item.name}
                                 status={Boolean(item.is_done)}

@@ -25,7 +25,8 @@ const TodoWrapper: React.FC<Props> = (props: Props) => {
                 {props.children}
                 <Button 
                     title={props.buttonTitle}
-                    onClick={props.navigate} />
+                    onClick={props.navigate}
+                    isIcon={true} />
             </div>
         </div>
     )

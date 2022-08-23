@@ -1,13 +1,16 @@
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import TextInput from "../../components/TextInput/TextInput.component";
 import TodoWrapper from "../../components/TodoWrapper/TodoWrapper.component"
+import { CombinedReducersState } from "../../store/combinedReducers";
 import { 
     loadCreateTodo as loadCreateTodoAction, 
     loadUpdateTodo as loadUpdateTodoAction,
-    loadGetTodo as loadGetTodoAction
+    loadGetTodo as loadGetTodoAction,
+    setTodoInput
 } from "../../store/todo/actions";
 import { ITodo, IUpdateTodo } from "../../types/todo.types";
 
@@ -19,8 +22,11 @@ const NewTodo: React.FC<Props> = (props: Props) => {
 
     const { id } = useParams()
     const dispatch = useDispatch();
-    const [todo, setTodo] = useState<string>("");
 
+    const isLoading: boolean | undefined = useSelector((state: CombinedReducersState) => state.todos.isLoading)
+    const todo: string | undefined = useSelector((state: CombinedReducersState) => state.todos.todoInput)
+
+    const setTodo = useCallback((state: string) => dispatch(setTodoInput(state)), [dispatch]);
     const handleCreateTodo = useCallback((state: ITodo) => dispatch(loadCreateTodoAction(state)), [dispatch]);
     const editTodo = useCallback((state: IUpdateTodo) => dispatch(loadUpdateTodoAction(state)), [dispatch]);
     const getTodoById = useCallback((state: number) => dispatch(loadGetTodoAction(state)), [dispatch]);
@@ -30,6 +36,7 @@ const NewTodo: React.FC<Props> = (props: Props) => {
         if(id) {
             getTodoById(Number(id))
         }
+        setTodo("")
     }, [])
 
     const handleSubmit = () => {
@@ -62,6 +69,7 @@ const NewTodo: React.FC<Props> = (props: Props) => {
                 buttonTitle="Create todo"
                 children={
                     <TextInput
+                        isLoading={isLoading}
                         value={todo}
                         label="todo"
                         onChange={(e: ChangeEvent<HTMLInputElement>) => setTodo(e.target.value)}

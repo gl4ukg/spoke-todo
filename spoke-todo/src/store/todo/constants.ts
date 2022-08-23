@@ -19,3 +19,5 @@ export const UPDATE_DONE_STATUS = `${scope}/UPDATE_DONE_STATUS`;
 
 export const LOAD_DELETE_TODO = `${scope}/LOAD_DELETE_TODO`;
 export const DELETE_TODO = `${scope}/DELETE_TODO`
+
+export const SET_TODO_INPUT = `${scope}/SET_TODO_INPUT`;

@@ -8,6 +8,7 @@ import { configureStore } from './store/configureStore';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

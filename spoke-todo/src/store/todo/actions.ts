@@ -89,3 +89,11 @@ export const loadDelete = (payload: Number) => {
         payload
     }
 }
+
+export const setTodoInput = (payload: string) => {
+    console.log(payload,"payload a anvje")
+    return {
+        type: constants.SET_TODO_INPUT,
+        payload
+    }
+}

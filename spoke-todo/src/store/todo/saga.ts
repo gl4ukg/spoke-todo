@@ -11,7 +11,7 @@ import {
 } from "../../services/todo.service";
 import { IAction } from "../../types/action.types";
 import { ITodo } from "../../types/todo.types";
-import { setLoading, createTodo, updateTodo, deleteAction, setTodos, loadTodos as loadTodosAction, getTodo } from "./actions";
+import { setLoading, createTodo, updateTodo, deleteAction, setTodos, loadTodos as loadTodosAction, getTodo, setTodoInput } from "./actions";
 import * as constants from "./constants"
 
 
@@ -46,6 +46,7 @@ function* loadGetTodoById(action: IAction) {
     try {
         const response: AxiosResponse<ITodo> = yield call(getTodoByIdService, action.payload)
         yield put(getTodo(response.data))
+        yield put(setTodoInput(response.data.name))
         yield put(setLoading(false))
     } catch {
         toast.error("Something went wrong!")
@@ -59,6 +60,7 @@ function* loadUpdateTodo(action: IAction) {
         const response: AxiosResponse<ITodo> = yield call(updateTodoService, action.payload)
         yield put(updateTodo(response.data))
         yield put(setLoading(false))
+        toast.info("Todo updated!")
     } catch {
         toast.error("Something went wrong!")
         yield put(setLoading(false))
@@ -72,6 +74,7 @@ function* loadUpdateDoneStatus(action: IAction) {
         yield call(updateDoneStatusService, action.payload)
         yield put(loadTodosAction())
         yield put(setLoading(false))
+        toast.info("Task status has been changed!")
     } catch {
         toast.error("Something went wrong!")
         yield put(setLoading(false))
@@ -81,9 +84,10 @@ function* loadUpdateDoneStatus(action: IAction) {
 function* loadDeleteTodo(action: IAction) {
     yield put(setLoading(true))
     try {
-        const response: AxiosResponse<ITodo> = yield call(deleteTodoService, action.payload)
+        yield call(deleteTodoService, action.payload)
         yield put(deleteAction(action.payload))
         yield put(setLoading(false))
+        toast.info("Task has been deleted!")
     } catch {
         toast.error("Something went wrong!")
         yield put(setLoading(false))
