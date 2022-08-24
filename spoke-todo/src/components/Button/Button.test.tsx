@@ -1,4 +1,6 @@
-import { render, screen } from '@testing-library/react';
+/* eslint-disable testing-library/prefer-screen-queries */
+/* eslint-disable testing-library/no-node-access */
+import { fireEvent, render } from '@testing-library/react';
 import Button from './Button.component';
 
 describe('button', () => {
@@ -12,44 +14,22 @@ describe('button', () => {
         expect(container).toHaveTextContent('Create');
     })
     it('should render with isIcon prop correctly', () => {
-        const { container } = render(<Button 
-            title='Create'
-            isIcon={true}
-        />);
+        const { getByTestId } = render(<Button isIcon />);
 
-        expect(container).toBeInTheDocument();
-        // expect(container).toHave
+        const isIcon = getByTestId('button-id').querySelector('span');
+        expect(isIcon).toBeInTheDocument();
     })
-    it('should render a button class of button', () => {
-        render(<Button 
-            title='Create'
-            isIcon={true}
-            />)
-        expect(screen.getByTestId('button-id')).toHaveClass('button')
+    it('should render a onClick function button', () => {
+        const onClick = jest.fn();
+      
+        const { getByTestId } = render(
+          <Button onClick={onClick} />
+        );
+      
+        fireEvent.click(getByTestId('button-id'));
+      
+        expect(onClick).toHaveBeenCalled();
     })
-    // it('should have img element when isIcon prop is present with isIcon as src and alt', () => {
-    //     const { container } = render(<Button 
-    //         text='Create'
-    //         isIcon='photo'
-    //     />);
-    //     const imgElement = container.getElementsByTagName('img')[0];
-
-
-    //     expect(container).toBeInTheDocument();
-    //     expect(imgElement).toHaveAttribute('src', 'photo');
-    //     expect(imgElement).toHaveAttribute('alt', 'photo');
-    // })
-
-    // it('should have given class name when class name prop is present', () => {
-    //     const { container } = render(<Button 
-    //         title='Create'
-    //         isIcon={false}
-    //         className='button'
-    //     />);
-        
-    //     expect(container).toBeInTheDocument();
-    //     expect(container.firstChild).toHaveClass('button');
-    // })
 });
 
 

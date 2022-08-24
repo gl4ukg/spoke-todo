@@ -5,14 +5,14 @@
     align-items: center;
     margin-bottom: 20px;
     cursor: pointer;
-    &--with-icon {
+    &-with-icon {
         display: flex;
         align-items: center;
     }
-    &--done {
+    &-done {
         text-decoration: line-through;
     }
-    &--title {
+    &-title {
         margin: 0 0 0 15px;
         font-weight: 500;
         font-size: 18px;

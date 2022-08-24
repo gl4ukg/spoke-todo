@@ -1,5 +1,5 @@
 .list-wrapper {
-    width: 400px;
+    width: 530px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,12 +44,14 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         width: -webkit-fill-available;
         height: 250px;
         margin-top: 20px;
-        padding: 30px 50px;
+        padding: 50px;
         background-color: var(--white);
-
+        div[data-testid="list-children-id"] {
+            height: 250px;
+        }
     }
 }

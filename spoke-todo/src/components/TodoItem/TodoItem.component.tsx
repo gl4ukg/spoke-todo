@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { CheckCircleOutlined, DeleteOutlined, MinusCircleOutlined } from "@ant-design/icons";
 import classNames from "classnames";
 import "./TodoItem.scss"
@@ -14,26 +13,49 @@ interface Props {
     loadingCount: number
 }
 
-const TodoItem: FC<Props> = (props: Props) => {
+const TodoItem = ({
+    isLoading, 
+    loadingCount, 
+    status, 
+    updateStatusTodo, 
+    updateTodo, 
+    title, 
+    deleteTodo
+}: Partial<Props>) => {
     
-    if(props.isLoading) {
-        return <Skeleton count={props.loadingCount} />
+    if(isLoading) {
+        return <div data-testid="is-loading">
+            <Skeleton count={loadingCount} />
+        </div>
     }
     return (
         <div 
+            data-testid="to-do-item"
             className="to-do-item">
-            <div className="to-do-item--with-icon">
-                {!props.status
-                    ? <MinusCircleOutlined onClick={props.updateStatusTodo} />
-                    : <CheckCircleOutlined onClick={props.updateStatusTodo} />
+            <div className="to-do-item-with-icon">
+                {!status
+                    ? <MinusCircleOutlined 
+                        className="not-completed" 
+                        data-testid="not-completed"
+                        onClick={updateStatusTodo}
+                    />
+                    : <CheckCircleOutlined 
+                        className="completed" 
+                        data-testid="completed"
+                        onClick={updateStatusTodo} 
+                    />
                 }
                 <p 
-                onClick={props.updateTodo}
-                className={classNames("to-do-item--title", {
-                    "to-do-item--done": props.status
-                })}>{props.title}</p>
+                onClick={updateTodo}
+                data-testid="update-todo"
+                className={classNames("to-do-item-title", {
+                    "to-do-item-done": status
+                })}>{title}</p>
             </div>
-            <DeleteOutlined onClick={props.deleteTodo} />
+            <DeleteOutlined 
+                onClick={deleteTodo}
+                data-testid="delete-todo"
+            />
         </div>
     )
 }

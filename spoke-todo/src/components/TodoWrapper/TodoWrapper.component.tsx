@@ -1,19 +1,24 @@
 import { UnorderedListOutlined } from "@ant-design/icons"
 import { ReactElement } from "react"
-import { useNavigate } from "react-router-dom"
 import Button from "../../components/Button/Button.component"
 import "./TodoWrapper.scss"
 
 interface Props {
     title: string
     buttonTitle: string
-    navigation: () => void
+    buttonNavigation: () => void
+    iconNavigation: () => void
     children: ReactElement
 }
 
-const TodoWrapper = ({title, buttonTitle, navigation, children}: Partial<Props>) => {
+const TodoWrapper = ({
+    title, 
+    buttonTitle, 
+    children, 
+    buttonNavigation, 
+    iconNavigation
+}: Partial<Props>) => {
 
-    const navigate = useNavigate()
 
     return (
         <div 
@@ -22,15 +27,17 @@ const TodoWrapper = ({title, buttonTitle, navigation, children}: Partial<Props>)
             <div className="title-wrapper">
                 <UnorderedListOutlined 
                     className="unordered-list-icon" 
-                    onClick={() => navigate("/")} 
+                    data-testid="icon-navigate-id"
+                    onClick={iconNavigation} 
                 />
                 <p>{title}</p>
             </div>
             <div className="list">
-                {children}
+                <div data-testid="list-children-id">{children}</div>
                 <Button 
+                    data-testid="button-id"
                     title={buttonTitle}
-                    onClick={navigation}
+                    onClick={buttonNavigation}
                     isIcon={true} />
             </div>
         </div>

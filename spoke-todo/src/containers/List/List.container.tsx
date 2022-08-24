@@ -13,21 +13,25 @@ const List: React.FC = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const todos: ITodo[] | undefined = useSelector((state: CombinedReducersState) => state.todos.todos);
-    const isLoading: boolean | undefined = useSelector((state: CombinedReducersState) => state.todos.isLoading);
+
+    const todos: ITodo[] | undefined = useSelector((state: CombinedReducersState) => state.todos?.todos);
+    const isLoading: boolean | undefined = useSelector((state: CombinedReducersState) => state.todos?.isLoading);
+    
     const getTodos = useCallback(() => dispatch(loadTodos()),[dispatch])
     const deleteTodo = useCallback((state: number) => dispatch(loadDelete(state)),[dispatch])
     const updateDoneStatus = useCallback((state: number) => dispatch(loadUpdateDoneStatus(state)),[dispatch])
 
     useEffect(() => {
         getTodos()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <div className="to-do-container">
             <TodoWrapper 
                 title="To do List"
-                navigate={() => navigate("/add-new-item")}
+                buttonNavigation={() => navigate("/add-new-item")}
+                iconNavigation={() => navigate("/")}
                 buttonTitle="New task"
                 children={
                     <div className="list-items">

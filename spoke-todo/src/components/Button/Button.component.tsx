@@ -1,4 +1,3 @@
-import { FC } from "react"
 import { PlusOutlined } from "@ant-design/icons"
 import "./Button.scss"
 
@@ -8,14 +7,18 @@ interface Props {
     onClick?: () => void
 }
 
-const Button = ({title, isIcon, onClick}: Partial<Props>) => {
+const Button = ({
+    title, 
+    isIcon, 
+    onClick
+}: Partial<Props>) => {
     return (
         <button 
             data-testid="button-id"
             className="button"
             onClick={onClick}
         >
-            {isIcon && <PlusOutlined />}
+            {isIcon && <PlusOutlined>is-icon</PlusOutlined>}
             <p>{title}</p>
         </button>
     )

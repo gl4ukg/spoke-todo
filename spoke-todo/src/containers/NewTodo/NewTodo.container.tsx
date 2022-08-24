@@ -1,7 +1,7 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import TextInput from "../../components/TextInput/TextInput.component";
 import TodoWrapper from "../../components/TodoWrapper/TodoWrapper.component"
@@ -13,18 +13,16 @@ import {
     setTodoInput
 } from "../../store/todo/actions";
 import { ITodo, IUpdateTodo } from "../../types/todo.types";
+import "./NewTodo.scss"
 
-interface Props {
-
-}
-
-const NewTodo: React.FC<Props> = (props: Props) => {
+const NewTodo: React.FC = () => {
 
     const { id } = useParams()
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const isLoading: boolean | undefined = useSelector((state: CombinedReducersState) => state.todos.isLoading)
-    const todo: string | undefined = useSelector((state: CombinedReducersState) => state.todos.todoInput)
+    const isLoading: boolean | undefined = useSelector((state: CombinedReducersState) => state.todos?.isLoading)
+    const todo: string | undefined = useSelector((state: CombinedReducersState) => state.todos?.todoInput)
 
     const setTodo = useCallback((state: string) => dispatch(setTodoInput(state)), [dispatch]);
     const handleCreateTodo = useCallback((state: ITodo) => dispatch(loadCreateTodoAction(state)), [dispatch]);
@@ -37,6 +35,7 @@ const NewTodo: React.FC<Props> = (props: Props) => {
             getTodoById(Number(id))
         }
         setTodo("")
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleSubmit = () => {
@@ -61,19 +60,28 @@ const NewTodo: React.FC<Props> = (props: Props) => {
         }
     }
 
+    const pageTitle = () => {
+        if(id) return "Update todo"
+        return "Create todo"
+
+    }
+
     return (
         <div className="to-do-container">
             <TodoWrapper
-                title="Create todo"
-                navigate={handleSubmit}
-                buttonTitle="Create todo"
+                title={pageTitle()}
+                buttonNavigation={handleSubmit}
+                iconNavigation={() => navigate("/")}
+                buttonTitle={pageTitle()}
                 children={
-                    <TextInput
-                        isLoading={isLoading}
-                        value={todo}
-                        label="todo"
-                        onChange={(e: ChangeEvent<HTMLInputElement>) => setTodo(e.target.value)}
-                    />
+                    <div className="new-to-do-text-input">
+                        <TextInput
+                            isLoading={isLoading}
+                            value={todo}
+                            label="todo"
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => setTodo(e.target.value)}
+                        />
+                    </div>
                 }
             />
         </div>

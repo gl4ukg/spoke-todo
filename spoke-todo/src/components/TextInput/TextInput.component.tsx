@@ -9,19 +9,28 @@ interface Props {
     isLoading: boolean
 }
 
-const TextInput: React.FC<Props> = (props: Props) => {
+const TextInput = ({
+    label, 
+    value, 
+    onChange, 
+    isLoading
+}: Partial<Props>) => {
 
-    if(props.isLoading) {
-        return <Skeleton />
+    if(isLoading) {
+        return <div data-testid="is-loading">
+            <Skeleton />
+        </div>
     }
     return (
-        <div className="text-input">
-            <label>{props.label}</label>
+        <div data-testid="text-input" className="text-input">
+            <label>{label}</label>
             <input 
+                aria-label="todo-input"
                 className="todo-input"
                 type="text"
-                value={props.value}
-                onChange={props.onChange}
+                value={value || ""}
+                defaultValue={value || ""}
+                onChange={onChange}
             />
         </div>
     )

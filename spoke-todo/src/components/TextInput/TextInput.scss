@@ -1,11 +1,13 @@
 .text-input {
     display: flex;
     flex-direction: column;
+    width: 100%;
     label {
         font-size: 14px;
         font-weight: 500;
         margin-bottom: 4px;
         color: var(--grey);
+        text-transform: capitalize;
     }
     .todo-input {
         height: 40px;

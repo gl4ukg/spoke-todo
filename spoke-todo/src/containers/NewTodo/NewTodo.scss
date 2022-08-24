@@ -1,4 +1,7 @@
-.text-input {
-    display: flex;
-    flex-direction: column;
+.to-do-container{
+    .new-to-do-text-input {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
 }

@@ -91,7 +91,6 @@ export const loadDelete = (payload: Number) => {
 }
 
 export const setTodoInput = (payload: string) => {
-    console.log(payload,"payload a anvje")
     return {
         type: constants.SET_TODO_INPUT,
         payload

@@ -21,7 +21,6 @@ function* loadTodos() {
         const response: AxiosResponse<ITodo[]> = yield call(getTodosService)
         yield put(setTodos(response.data))
         yield put(setLoading(false))
-        toast.info("Todo loaded!")
     } catch {
         toast.error("Something went wrong!")
         yield put(setLoading(false))

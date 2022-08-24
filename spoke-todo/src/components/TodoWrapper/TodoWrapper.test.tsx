@@ -1,4 +1,6 @@
-import { render, screen } from '@testing-library/react';
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/prefer-screen-queries */
+import { fireEvent, render } from '@testing-library/react';
 import TodoWrapper from './TodoWrapper.component';
 
 describe('TodoWrapper', () => {
@@ -18,19 +20,36 @@ describe('TodoWrapper', () => {
         expect(container).toBeInTheDocument();
         expect(container).toHaveTextContent('Create');
     })
-    it('should render with navigate prop correctly', () => {
-        const { container } = render(<TodoWrapper 
-            // navigate={}
-        />);
+    it('should render a buttonNavigation onClick function', () => {
+        const buttonNavigation = jest.fn();
+      
+        const { getByTestId } = render(
+          <TodoWrapper buttonNavigation={buttonNavigation} />
+        );
 
-        expect(container).toBeInTheDocument();
+        fireEvent.click(getByTestId('button-id'));
+      
+        expect(buttonNavigation).toHaveBeenCalled();
     })
-    it('should render a div with the class of list-wrapper', () => {
-        render(<TodoWrapper 
-            title='Create'
-            buttonTitle='Create'
-            />)
-        expect(screen.getByTestId('list-wrapper-id')).toHaveClass('list-wrapper')
+    it('should render a iconNavigation onClick function', () => {
+        const iconNavigation = jest.fn();
+      
+        const { getByTestId } = render(
+          <TodoWrapper iconNavigation={iconNavigation} />
+        );
+      
+        fireEvent.click(getByTestId('icon-navigate-id'));
+      
+        expect(iconNavigation).toHaveBeenCalled();
     })
- 
+    it('should render children prop', () => {
+     
+        
+        const { getByTestId } = render(<TodoWrapper />);
+
+        const children = getByTestId('list-children-id')
+        
+        expect(children).toBeDefined();
+
+    })
 });
